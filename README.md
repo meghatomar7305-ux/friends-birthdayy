@@ -1,1 +1,338 @@
-# friends-birthdayy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday ! 🎉💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #FFD7E8 0%, #C7CEEA 25%, #B5EAD7 50%, #E0BBE4 75%, #FFDFD3 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 50px 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(181, 122, 145, 0.2);
+            border: 4px solid #ffffff;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .step {
+            display: none;
+            animation: aestheticFadeIn 0.8s ease-out forwards;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes aestheticFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Titles & Aesthetic Text */
+        .title-main {
+            font-family: 'Dancing Script', cursive;
+            font-size: 48px;
+            color: #b57a91;
+            margin-bottom: 10px;
+        }
+
+        .subtitle-text {
+            font-size: 22px;
+            color: #9a8c98;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        /* Large Animated Emojis */
+        .emoji-large {
+            font-size: 80px;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: aestheticFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes aestheticFloat {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        /* Countdown Box */
+        .countdown-wrapper {
+            background: #fff5f8;
+            border-radius: 25px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 2px dashed #eecbd9;
+        }
+
+        .countdown-display {
+            font-size: 55px;
+            color: #b57a91;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        /* Message Styles */
+        .message-box {
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            margin: 20px 0;
+            min-height: 200px;
+            box-shadow: inset 0 0 15px rgba(238, 203, 217, 0.3);
+        }
+
+        .message-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            color: #4a4a4a;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            animation: lineFade 1s ease-out;
+        }
+
+        @keyframes lineFade {
+            from { opacity: 0; filter: blur(5px); }
+            to { opacity: 1; filter: blur(0); }
+        }
+
+        /* Gift Styles */
+        .gift-emoji {
+            font-size: 100px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .gift-content-box {
+            display: none;
+            background: #fdf0f6;
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            border: 2px solid #eecbd9;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 14px 28px;
+            font-size: 16px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .btn-next { background: #b57a91; color: white; }
+        .btn-next:hover { transform: scale(1.05); background: #9a667b; }
+
+        .btn-restart { background: #eecbd9; color: #b57a91; }
+
+        input {
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 2px solid #eecbd9;
+            width: 80%;
+            text-align: center;
+            font-size: 18px;
+            outline: none;
+            color: #b57a91;
+        }
+
+        /* Decorations */
+        .falling-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="step active" id="step1">
+            <div class="emoji-large">🎀✨🌷</div>
+            <div class="title-main">Hi Beautiful!</div>
+            <div class="subtitle-text">Happy Birthday!</div>
+            <input type="text" id="nameInput" placeholder="Enter your name..." maxlength="20">
+            <div class="button-group">
+                <button class="btn-next" onclick="goToStep2()">Open Surprise 💕</button>
+            </div>
+        </div>
+
+        <div class="step" id="step2">
+            <div class="emoji-large">⏳✨💖</div>
+            <div class="title-main">Hold on...</div>
+            <div class="countdown-wrapper">
+                <div class="countdown-display" id="countdown">05</div>
+                <p style="color: #b57a91; margin-top: 10px;">Gifts are being packed with love!</p>
+            </div>
+        </div>
+
+        <div class="step" id="step3">
+            <div class="title-main">A Heartfelt Note</div>
+            <div class="message-box" id="msgBox">
+                <div class="message-text">🎂 Happy Birthday to my sonpapdi!</div>
+            </div>
+            <div class="button-group">
+                <button class="btn-next" id="readMoreBtn" onclick="revealNextMessage()">Next Message 📖</button>
+                <button class="btn-next" id="finalNextBtn" style="display:none;" onclick="goToStep4()">View Gift 🎁</button>
+            </div>
+        </div>
+
+        <div class="step" id="step4">
+            <div class="title-main">Your Surprise</div>
+            <div class="gift-emoji" id="giftIcon" onclick="revealGift()">🎁</div>
+            <div class="gift-content-box" id="giftContent">
+                <p class="message-text" style="color: #b57a91;">"Tu Ik Tohfa Hai Khuda Ka...✨"</p>
+                <p>You are the best in the whole world! Love you! 💖</p>
+            </div>
+            <div class="button-group">
+                <button class="btn-next" onclick="goToStep5()">Finish ✨</button>
+            </div>
+        </div>
+
+        <div class="step" id="step5">
+            <div class="emoji-large">🥳🎉🎂</div>
+            <div class="title-main">Yayyy!</div>
+            <div class="subtitle-text">Happy Birthday, <span id="userName">bhanu</span>!</div>
+            <div class="button-group">
+                <button class="btn-next" onclick="celebration()">🎉 CELEBRATE! 🎉</button>
+                <button class="btn-restart" onclick="location.reload()">Restart 🔄</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentMsg = 0;
+        const messages = [
+            "🧸 You're more than a friend",
+            "🌸 May your day be filled with cake and love.",
+            "🕊️ Thank you for always being my safe place!"
+        ];
+
+        function goToStep2() {
+            const name = document.getElementById('nameInput').value;
+            if(!name) return alert("Please enter your name, cutie! ✨");
+            document.getElementById('userName').innerText = name;
+            
+            showStep(2);
+            let timeLeft = 5;
+            const timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('countdown').innerText = "0" + timeLeft;
+                if(timeLeft <= 0) {
+                    clearInterval(timer);
+                    goToStep3();
+                }
+            }, 1000);
+        }
+
+        function goToStep3() { showStep(3); }
+        function goToStep4() { showStep(4); }
+        function goToStep5() { showStep(5); }
+
+        function showStep(num) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + num).classList.add('active');
+        }
+
+        function revealNextMessage() {
+            if(currentMsg < messages.length) {
+                const newMsg = document.createElement('div');
+                newMsg.className = 'message-text';
+                newMsg.innerText = messages[currentMsg];
+                document.getElementById('msgBox').appendChild(newMsg);
+                currentMsg++;
+            }
+            if(currentMsg === messages.length) {
+                document.getElementById('readMoreBtn').style.display = 'none';
+                document.getElementById('finalNextBtn').style.display = 'inline-block';
+            }
+        }
+
+        function revealGift() {
+            document.getElementById('giftContent').style.display = 'block';
+            document.getElementById('giftIcon').style.animation = 'none';
+            createHeartRain();
+        }
+
+        function celebration() {
+            for(let i=0; i<50; i++) {
+                setTimeout(createHeartRain, i * 100);
+            }
+        }
+
+        function createHeartRain() {
+            const heart = document.createElement('div');
+            heart.className = 'falling-heart';
+            heart.innerHTML = ['💖','✨','🌸','🎈','💗'][Math.floor(Math.random()*5)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '-5vh';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            heart.style.duration = (Math.random() * 3 + 2) + 's';
+            
+            document.body.appendChild(heart);
+            
+            const animation = heart.animate([
+                { transform: `translateY(0) rotate(0deg)` },
+                { transform: `translateY(110vh) rotate(360deg)` }
+            ], { duration: 3000 });
+
+            animation.onfinish = () => heart.remove();
+        }
+    </script>
+</body>
+</html>
